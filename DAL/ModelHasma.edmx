@@ -1,0 +1,636 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="HasmaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Bon">
+          <Key>
+            <PropertyRef Name="BID" />
+          </Key>
+          <Property Name="BID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SerialNumber" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="CatID" />
+            <PropertyRef Name="SubCatID" />
+          </Key>
+          <Property Name="CatID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SubCatID" Type="int" Nullable="false" />
+          <Property Name="SubName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Group" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ImgName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Hasma.dbo.Feature' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Feature">
+          <Key>
+            <PropertyRef Name="FID" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="ImageID" />
+            <PropertyRef Name="IsBaner" />
+          </Key>
+          <Property Name="FID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ImageID" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="IsBaner" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ghest">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Percentage" Type="float" Nullable="false" />
+          <Property Name="MaxGhestNumber" Type="int" Nullable="false" />
+          <Property Name="MinGhestNumber" Type="int" Nullable="false" />
+          <Property Name="MaxGhestValue" Type="bigint" Nullable="false" />
+          <Property Name="MinGhestValue" Type="bigint" Nullable="false" />
+          <Property Name="MinPishPardakht" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Log">
+          <Key>
+            <PropertyRef Name="LID" />
+          </Key>
+          <Property Name="LID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UIDorTELLNUMBER" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ActionType" Type="int" Nullable="false" />
+          <Property Name="Result" Type="int" Nullable="false" />
+          <Property Name="Time" Type="datetime" Nullable="false" />
+          <Property Name="Exception" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="OID" />
+          </Key>
+          <Property Name="OID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UID" Type="int" Nullable="false" />
+          <Property Name="BuyID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="OrderTime" Type="datetime" Nullable="false" />
+          <Property Name="PayStatus" Type="bit" Nullable="false" />
+          <Property Name="IsDelivered" Type="bit" Nullable="false" />
+          <Property Name="ReciverInfo" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ProductsInfo" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="TypePay" Type="int" Nullable="false" />
+          <Property Name="GhestNumber" Type="int" Nullable="false" />
+          <Property Name="GhestValue" Type="bigint" Nullable="false" />
+          <Property Name="MainPrice" Type="bigint" Nullable="false" />
+          <Property Name="PishPardakht" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Pay">
+          <Key>
+            <PropertyRef Name="PayID" />
+          </Key>
+          <Property Name="PayID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UID" Type="int" Nullable="false" />
+          <Property Name="OID" Type="int" Nullable="false" />
+          <Property Name="BuyID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Amount" Type="bigint" Nullable="false" />
+          <Property Name="StartMoment" Type="datetime" Nullable="false" />
+          <Property Name="DargahState" Type="int" />
+          <Property Name="Token" Type="nvarchar(max)" />
+          <Property Name="TrackingNumber" Type="nvarchar(max)" />
+          <Property Name="ReferenceNumber" Type="nvarchar(max)" />
+          <Property Name="EndMoment" Type="datetime" />
+          <Property Name="IsReverse" Type="bit" />
+          <Property Name="FinalState" Type="int" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="PID" />
+          </Key>
+          <Property Name="PID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CatID" Type="int" Nullable="false" />
+          <Property Name="SubCatID" Type="int" Nullable="false" />
+          <Property Name="Price" Type="int" Nullable="false" />
+          <Property Name="PriceOff" Type="int" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="specification" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Brand" Type="nchar" MaxLength="10" />
+          <Property Name="StockCount" Type="int" />
+        </EntityType>
+        <EntityType Name="PurchaseZarinpalLog">
+          <Key>
+            <PropertyRef Name="ZPID" />
+          </Key>
+          <Property Name="ZPID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Autohority" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="RefID" Type="bigint" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="UID" Type="int" Nullable="false" />
+          <Property Name="PayDate" Type="datetime" Nullable="false" />
+          <Property Name="Amount" Type="int" Nullable="false" />
+          <Property Name="Product" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="OID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tag">
+          <Key>
+            <PropertyRef Name="TID" />
+          </Key>
+          <Property Name="TID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UID" />
+          </Key>
+          <Property Name="UID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TellNumber" Type="nvarchar" MaxLength="12" Nullable="false" />
+          <Property Name="ActiveCode" Type="nvarchar" MaxLength="5" Nullable="false" />
+          <Property Name="JoinDate" Type="datetime" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="CodeMeli" Type="nchar" MaxLength="10" />
+          <Property Name="Address" Type="nvarchar(max)" />
+          <Property Name="CodePosti" Type="nchar" MaxLength="10" />
+          <Property Name="City" Type="nvarchar" MaxLength="50" />
+          <Property Name="Role" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserBon">
+          <Key>
+            <PropertyRef Name="UBID" />
+          </Key>
+          <Property Name="UBID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BID" Type="int" Nullable="false" />
+          <Property Name="UID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserDocument">
+          <Key>
+            <PropertyRef Name="UID" />
+          </Key>
+          <Property Name="UID" Type="int" Nullable="false" />
+          <Property Name="KartMeli" Type="int" Nullable="false" />
+          <Property Name="KasrHoghoogh" Type="int" Nullable="false" />
+          <Property Name="JavazKasb" Type="int" Nullable="false" />
+          <Property Name="FishHoghoogh" Type="int" Nullable="false" />
+          <Property Name="CheckZemanat" Type="int" Nullable="false" />
+          <Property Name="LastUpTime" Type="datetime" />
+          <Property Name="VerifiedTime" Type="datetime" />
+          <Property Name="Verified" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserMessage">
+          <Key>
+            <PropertyRef Name="UMID" />
+          </Key>
+          <Property Name="UMID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UID" Type="int" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Context" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="seen" Type="bit" Nullable="false" />
+        </EntityType>
+        <Function Name="LoginByActiveCode" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tellnumber" Type="varchar" Mode="In" />
+          <Parameter Name="activecode" Type="varchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="HasmaModelStoreContainer">
+          <EntitySet Name="Bon" EntityType="Self.Bon" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ghest" EntityType="Self.Ghest" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Log" EntityType="Self.Log" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pay" EntityType="Self.Pay" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PurchaseZarinpalLog" EntityType="Self.PurchaseZarinpalLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tag" EntityType="Self.Tag" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserBon" EntityType="Self.UserBon" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserDocument" EntityType="Self.UserDocument" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserMessage" EntityType="Self.UserMessage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Feature" EntityType="Self.Feature" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Feature].[FID] AS [FID], 
+    [Feature].[Name] AS [Name], 
+    [Feature].[ImageID] AS [ImageID], 
+    [Feature].[IsBaner] AS [IsBaner]
+    FROM [dbo].[Feature] AS [Feature]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="HasmaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="HasmaEntities" annotation:LazyLoadingEnabled="true">
+          <FunctionImport Name="LoginByActiveCode" ReturnType="Collection(HasmaModel.LoginByActiveCode_Result)">
+            <Parameter Name="tellnumber" Mode="In" Type="String" />
+            <Parameter Name="activecode" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="Bons" EntityType="HasmaModel.Bon" />
+          <EntitySet Name="Categories" EntityType="HasmaModel.Category" />
+          <EntitySet Name="Ghests" EntityType="HasmaModel.Ghest" />
+          <EntitySet Name="Logs" EntityType="HasmaModel.Log" />
+          <EntitySet Name="Orders" EntityType="HasmaModel.Order" />
+          <EntitySet Name="Pays" EntityType="HasmaModel.Pay" />
+          <EntitySet Name="Products" EntityType="HasmaModel.Product" />
+          <EntitySet Name="PurchaseZarinpalLogs" EntityType="HasmaModel.PurchaseZarinpalLog" />
+          <EntitySet Name="Tags" EntityType="HasmaModel.Tag" />
+          <EntitySet Name="Users" EntityType="HasmaModel.User" />
+          <EntitySet Name="UserBons" EntityType="HasmaModel.UserBon" />
+          <EntitySet Name="UserDocuments" EntityType="HasmaModel.UserDocument" />
+          <EntitySet Name="UserMessages" EntityType="HasmaModel.UserMessage" />
+          <EntitySet Name="Features" EntityType="HasmaModel.Feature" />
+          </EntityContainer>
+        <ComplexType Name="LoginByActiveCode_Result">
+          <Property Type="Int32" Name="UID" Nullable="false" />
+          <Property Type="String" Name="TellNumber" Nullable="false" MaxLength="12" />
+          <Property Type="String" Name="ActiveCode" Nullable="false" MaxLength="5" />
+        </ComplexType>
+        <EntityType Name="Bon">
+          <Key>
+            <PropertyRef Name="BID" />
+          </Key>
+          <Property Name="BID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SerialNumber" Type="Int64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="CatID" />
+            <PropertyRef Name="SubCatID" />
+          </Key>
+          <Property Name="CatID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SubCatID" Type="Int32" Nullable="false" />
+          <Property Name="SubName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Group" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ImgName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Ghest">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Percentage" Type="Double" Nullable="false" />
+          <Property Name="MaxGhestNumber" Type="Int32" Nullable="false" />
+          <Property Name="MinGhestNumber" Type="Int32" Nullable="false" />
+          <Property Name="MaxGhestValue" Type="Int64" Nullable="false" />
+          <Property Name="MinGhestValue" Type="Int64" Nullable="false" />
+          <Property Name="MinPishPardakht" Type="Int64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Log">
+          <Key>
+            <PropertyRef Name="LID" />
+          </Key>
+          <Property Name="LID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UIDorTELLNUMBER" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ActionType" Type="Int32" Nullable="false" />
+          <Property Name="Result" Type="Int32" Nullable="false" />
+          <Property Name="Time" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Exception" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="OID" />
+          </Key>
+          <Property Name="OID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UID" Type="Int32" Nullable="false" />
+          <Property Name="BuyID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OrderTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="PayStatus" Type="Boolean" Nullable="false" />
+          <Property Name="IsDelivered" Type="Boolean" Nullable="false" />
+          <Property Name="ReciverInfo" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ProductsInfo" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TypePay" Type="Int32" Nullable="false" />
+          <Property Name="GhestNumber" Type="Int32" Nullable="false" />
+          <Property Name="GhestValue" Type="Int64" Nullable="false" />
+          <Property Name="MainPrice" Type="Int64" Nullable="false" />
+          <Property Name="PishPardakht" Type="Int64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Pay">
+          <Key>
+            <PropertyRef Name="PayID" />
+          </Key>
+          <Property Name="PayID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UID" Type="Int32" Nullable="false" />
+          <Property Name="OID" Type="Int32" Nullable="false" />
+          <Property Name="BuyID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Amount" Type="Int64" Nullable="false" />
+          <Property Name="StartMoment" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DargahState" Type="Int32" />
+          <Property Name="Token" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TrackingNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ReferenceNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="EndMoment" Type="DateTime" Precision="3" />
+          <Property Name="IsReverse" Type="Boolean" />
+          <Property Name="FinalState" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="PID" />
+          </Key>
+          <Property Name="PID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CatID" Type="Int32" Nullable="false" />
+          <Property Name="SubCatID" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Int32" Nullable="false" />
+          <Property Name="PriceOff" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="specification" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Brand" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="StockCount" Type="Int32" />
+        </EntityType>
+        <EntityType Name="PurchaseZarinpalLog">
+          <Key>
+            <PropertyRef Name="ZPID" />
+          </Key>
+          <Property Name="ZPID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Autohority" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RefID" Type="Int64" Nullable="false" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="UID" Type="Int32" Nullable="false" />
+          <Property Name="PayDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Amount" Type="Int32" Nullable="false" />
+          <Property Name="Product" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tag">
+          <Key>
+            <PropertyRef Name="TID" />
+          </Key>
+          <Property Name="TID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UID" />
+          </Key>
+          <Property Name="UID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TellNumber" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Name="ActiveCode" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="JoinDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CodeMeli" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CodePosti" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Role" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserBon">
+          <Key>
+            <PropertyRef Name="UBID" />
+          </Key>
+          <Property Name="UBID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BID" Type="Int32" Nullable="false" />
+          <Property Name="UID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserDocument">
+          <Key>
+            <PropertyRef Name="UID" />
+          </Key>
+          <Property Name="UID" Type="Int32" Nullable="false" />
+          <Property Name="KartMeli" Type="Int32" Nullable="false" />
+          <Property Name="KasrHoghoogh" Type="Int32" Nullable="false" />
+          <Property Name="JavazKasb" Type="Int32" Nullable="false" />
+          <Property Name="FishHoghoogh" Type="Int32" Nullable="false" />
+          <Property Name="CheckZemanat" Type="Int32" Nullable="false" />
+          <Property Name="LastUpTime" Type="DateTime" Precision="3" />
+          <Property Name="VerifiedTime" Type="DateTime" Precision="3" />
+          <Property Name="Verified" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserMessage">
+          <Key>
+            <PropertyRef Name="UMID" />
+          </Key>
+          <Property Name="UMID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UID" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Context" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="seen" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Feature">
+          <Key>
+            <PropertyRef Name="FID" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="ImageID" />
+            <PropertyRef Name="IsBaner" />
+          </Key>
+          <Property Name="FID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ImageID" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsBaner" Type="Boolean" Nullable="false" />
+        </EntityType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="HasmaModelStoreContainer" CdmEntityContainer="HasmaEntities">
+          <FunctionImportMapping FunctionImportName="LoginByActiveCode" FunctionName="HasmaModel.Store.LoginByActiveCode">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HasmaModel.LoginByActiveCode_Result">
+                <ScalarProperty Name="UID" ColumnName="UID" />
+                <ScalarProperty Name="TellNumber" ColumnName="TellNumber" />
+                <ScalarProperty Name="ActiveCode" ColumnName="ActiveCode" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="Bons">
+            <EntityTypeMapping TypeName="HasmaModel.Bon">
+              <MappingFragment StoreEntitySet="Bon">
+                <ScalarProperty Name="SerialNumber" ColumnName="SerialNumber" />
+                <ScalarProperty Name="BID" ColumnName="BID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="HasmaModel.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="ImgName" ColumnName="ImgName" />
+                <ScalarProperty Name="Group" ColumnName="Group" />
+                <ScalarProperty Name="SubName" ColumnName="SubName" />
+                <ScalarProperty Name="SubCatID" ColumnName="SubCatID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CatID" ColumnName="CatID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ghests">
+            <EntityTypeMapping TypeName="HasmaModel.Ghest">
+              <MappingFragment StoreEntitySet="Ghest">
+                <ScalarProperty Name="MinPishPardakht" ColumnName="MinPishPardakht" />
+                <ScalarProperty Name="MinGhestValue" ColumnName="MinGhestValue" />
+                <ScalarProperty Name="MaxGhestValue" ColumnName="MaxGhestValue" />
+                <ScalarProperty Name="MinGhestNumber" ColumnName="MinGhestNumber" />
+                <ScalarProperty Name="MaxGhestNumber" ColumnName="MaxGhestNumber" />
+                <ScalarProperty Name="Percentage" ColumnName="Percentage" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Logs">
+            <EntityTypeMapping TypeName="HasmaModel.Log">
+              <MappingFragment StoreEntitySet="Log">
+                <ScalarProperty Name="Exception" ColumnName="Exception" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="Result" ColumnName="Result" />
+                <ScalarProperty Name="ActionType" ColumnName="ActionType" />
+                <ScalarProperty Name="UIDorTELLNUMBER" ColumnName="UIDorTELLNUMBER" />
+                <ScalarProperty Name="LID" ColumnName="LID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="HasmaModel.Order">
+              <MappingFragment StoreEntitySet="Order">
+                <ScalarProperty Name="PishPardakht" ColumnName="PishPardakht" />
+                <ScalarProperty Name="MainPrice" ColumnName="MainPrice" />
+                <ScalarProperty Name="GhestValue" ColumnName="GhestValue" />
+                <ScalarProperty Name="GhestNumber" ColumnName="GhestNumber" />
+                <ScalarProperty Name="TypePay" ColumnName="TypePay" />
+                <ScalarProperty Name="ProductsInfo" ColumnName="ProductsInfo" />
+                <ScalarProperty Name="ReciverInfo" ColumnName="ReciverInfo" />
+                <ScalarProperty Name="IsDelivered" ColumnName="IsDelivered" />
+                <ScalarProperty Name="PayStatus" ColumnName="PayStatus" />
+                <ScalarProperty Name="OrderTime" ColumnName="OrderTime" />
+                <ScalarProperty Name="BuyID" ColumnName="BuyID" />
+                <ScalarProperty Name="UID" ColumnName="UID" />
+                <ScalarProperty Name="OID" ColumnName="OID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pays">
+            <EntityTypeMapping TypeName="HasmaModel.Pay">
+              <MappingFragment StoreEntitySet="Pay">
+                <ScalarProperty Name="FinalState" ColumnName="FinalState" />
+                <ScalarProperty Name="IsReverse" ColumnName="IsReverse" />
+                <ScalarProperty Name="EndMoment" ColumnName="EndMoment" />
+                <ScalarProperty Name="ReferenceNumber" ColumnName="ReferenceNumber" />
+                <ScalarProperty Name="TrackingNumber" ColumnName="TrackingNumber" />
+                <ScalarProperty Name="Token" ColumnName="Token" />
+                <ScalarProperty Name="DargahState" ColumnName="DargahState" />
+                <ScalarProperty Name="StartMoment" ColumnName="StartMoment" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="BuyID" ColumnName="BuyID" />
+                <ScalarProperty Name="OID" ColumnName="OID" />
+                <ScalarProperty Name="UID" ColumnName="UID" />
+                <ScalarProperty Name="PayID" ColumnName="PayID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="HasmaModel.Product">
+              <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="StockCount" ColumnName="StockCount" />
+                <ScalarProperty Name="Brand" ColumnName="Brand" />
+                <ScalarProperty Name="specification" ColumnName="specification" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="PriceOff" ColumnName="PriceOff" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="SubCatID" ColumnName="SubCatID" />
+                <ScalarProperty Name="CatID" ColumnName="CatID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="PID" ColumnName="PID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PurchaseZarinpalLogs">
+            <EntityTypeMapping TypeName="HasmaModel.PurchaseZarinpalLog">
+              <MappingFragment StoreEntitySet="PurchaseZarinpalLog">
+                <ScalarProperty Name="OID" ColumnName="OID" />
+                <ScalarProperty Name="Product" ColumnName="Product" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="PayDate" ColumnName="PayDate" />
+                <ScalarProperty Name="UID" ColumnName="UID" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="RefID" ColumnName="RefID" />
+                <ScalarProperty Name="Autohority" ColumnName="Autohority" />
+                <ScalarProperty Name="ZPID" ColumnName="ZPID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tags">
+            <EntityTypeMapping TypeName="HasmaModel.Tag">
+              <MappingFragment StoreEntitySet="Tag">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="TID" ColumnName="TID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="HasmaModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="CodePosti" ColumnName="CodePosti" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="CodeMeli" ColumnName="CodeMeli" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="JoinDate" ColumnName="JoinDate" />
+                <ScalarProperty Name="ActiveCode" ColumnName="ActiveCode" />
+                <ScalarProperty Name="TellNumber" ColumnName="TellNumber" />
+                <ScalarProperty Name="UID" ColumnName="UID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserBons">
+            <EntityTypeMapping TypeName="HasmaModel.UserBon">
+              <MappingFragment StoreEntitySet="UserBon">
+                <ScalarProperty Name="UID" ColumnName="UID" />
+                <ScalarProperty Name="BID" ColumnName="BID" />
+                <ScalarProperty Name="UBID" ColumnName="UBID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserDocuments">
+            <EntityTypeMapping TypeName="HasmaModel.UserDocument">
+              <MappingFragment StoreEntitySet="UserDocument">
+                <ScalarProperty Name="Verified" ColumnName="Verified" />
+                <ScalarProperty Name="VerifiedTime" ColumnName="VerifiedTime" />
+                <ScalarProperty Name="LastUpTime" ColumnName="LastUpTime" />
+                <ScalarProperty Name="CheckZemanat" ColumnName="CheckZemanat" />
+                <ScalarProperty Name="FishHoghoogh" ColumnName="FishHoghoogh" />
+                <ScalarProperty Name="JavazKasb" ColumnName="JavazKasb" />
+                <ScalarProperty Name="KasrHoghoogh" ColumnName="KasrHoghoogh" />
+                <ScalarProperty Name="KartMeli" ColumnName="KartMeli" />
+                <ScalarProperty Name="UID" ColumnName="UID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserMessages">
+            <EntityTypeMapping TypeName="HasmaModel.UserMessage">
+              <MappingFragment StoreEntitySet="UserMessage">
+                <ScalarProperty Name="seen" ColumnName="seen" />
+                <ScalarProperty Name="Context" ColumnName="Context" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="UID" ColumnName="UID" />
+                <ScalarProperty Name="UMID" ColumnName="UMID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Features">
+            <EntityTypeMapping TypeName="HasmaModel.Feature">
+              <MappingFragment StoreEntitySet="Feature">
+                <ScalarProperty Name="IsBaner" ColumnName="IsBaner" />
+                <ScalarProperty Name="ImageID" ColumnName="ImageID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="FID" ColumnName="FID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
